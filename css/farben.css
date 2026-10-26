@@ -18,7 +18,7 @@
   --akzent-freie-trauung:  var(--copper);
 
   /* Glas-Effekt */
-  --glas:         rgba(255, 255, 255, 0.38);
+  --glas:         rgba(255, 255, 255, 0.55);
   --glas-rand:    rgba(255, 255, 255, 0.65);
   --schatten:     0 8px 32px rgba(59, 47, 42, 0.10);
 }

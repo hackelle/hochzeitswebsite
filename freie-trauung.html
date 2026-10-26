@@ -21,6 +21,7 @@
 
   <main class="inhalt">
     <section class="karte einblenden" style="--verzoegerung: 0.3s" data-adresse="Potsdamer Landstraße 4, 14550 Groß Kreutz (Havel)">
+      <img class="hof-logo" src="bilder/tigermotte-logo.png" alt="Logo des Freizeithofs Tigermotte" onerror="this.remove()">
       <h2>Ort</h2>
       <p class="ort">Freizeithof Tigermotte</p>
       <a class="adresse" href="https://www.google.com/maps/search/?api=1&amp;query=Potsdamer%20Landstra%C3%9Fe%204%2C%2014550%20Gro%C3%9F%20Kreutz%20(Havel)" target="_blank" rel="noopener">
@@ -31,21 +32,30 @@
 
     <section class="karte einblenden" style="--verzoegerung: 0.45s">
       <h2>Anreise mit Bus &amp; Bahn</h2>
-      <p>Mit dem RE1 bis zum Bahnhof Götz.</p>
+      <p>Mit dem RE1 bis zum Bahnhof Götz. Von dort sind es etwa 25 Minuten (1,8&nbsp;km) zu Fuß zum Hof.</p>
+      <div class="karten-links">
+        <a class="karten-link sans" target="_blank" rel="noopener"
+           href="https://www.google.com/maps/dir/?api=1&amp;origin=Bahnhof%20G%C3%B6tz&amp;destination=Potsdamer%20Landstra%C3%9Fe%204%2C%2014550%20Gro%C3%9F%20Kreutz%20(Havel)&amp;travelmode=walking">Fußweg in Google Maps</a>
+        <a class="karten-link sans" target="_blank" rel="noopener"
+           href="https://maps.apple.com/?saddr=Bahnhof%20G%C3%B6tz&amp;daddr=Potsdamer%20Landstra%C3%9Fe%204%2C%2014550%20Gro%C3%9F%20Kreutz%20(Havel)&amp;dirflg=w">Fußweg in Apple Maps</a>
+      </div>
       <p>Für den Heimweg: Die Bahnen fahren bis etwa 1:30 Uhr.</p>
     </section>
 
     <section class="karte einblenden" style="--verzoegerung: 0.6s" data-adresse="Ringstraße 7, 14550 Groß Kreutz (Havel)">
       <h2>Übernachtung</h2>
       <p>Ihr könnt direkt auf dem Hof übernachten, mit Zelt, Campingbus oder Wohnmobil.</p>
-      <p>Alternativ gibt es das Hotel Götz:</p>
+      <p>Alternativ gibt es das <a href="https://www.hotel-goetz.com/" target="_blank" rel="noopener">Hotel Götz</a>:</p>
       <a class="adresse" href="https://www.google.com/maps/search/?api=1&amp;query=Ringstra%C3%9Fe%207%2C%2014550%20Gro%C3%9F%20Kreutz%20(Havel)" target="_blank" rel="noopener">
         <address>Ringstraße 7<br>14550 Groß Kreutz (Havel), OT Götz</address>
       </a>
-      <div class="karten-links"></div>
+      <div class="karten-links">
+        <a class="karten-link sans" href="https://www.hotel-goetz.com/" target="_blank" rel="noopener">Website Hotel Götz</a>
+      </div>
     </section>
   </main>
 
   <script src="js/karten.js"></script>
+  <script src="js/aquarell.js"></script>
 </body>
 </html>
