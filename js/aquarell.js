@@ -1,6 +1,8 @@
 // Aquarell-Blumen, die sich langsam in den Hintergrund "malen".
 // Jede Blume: Stiel wird gezeichnet, dann Blätter, dann blühen die Blüten auf.
-// Nach dem ersten Bild verblasst immer wieder eine alte Blume und eine neue entsteht.
+// Die Blumen liegen über die ganze Seite verteilt und scrollen mit; jede malt sich,
+// sobald sie ins Bild kommt. Danach verblasst im sichtbaren Bereich immer wieder
+// eine alte Blume und eine neue entsteht.
 (function () {
   var NS = "http://www.w3.org/2000/svg";
   var FARBEN = {
@@ -14,10 +16,10 @@
   var MOSS = "#9F8A49";
 
   var ruhig = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var behaelter = document.querySelector(".hintergrund");
-  if (!behaelter) return;
+  if (!document.querySelector(".hintergrund")) return;
 
-  var svg, ebene, blumen = [], breite = 0, hoehe = 0, takt;
+  var svg, ebene, blumen = [], breite = 0, hoehe = 0, takt, beobachter;
+  var PRO_BILDSCHIRM = window.innerWidth > 700 ? 10 : 6;
 
   function el(name, attrs, eltern) {
     var e = document.createElementNS(NS, name);
@@ -114,34 +116,45 @@
     wachsen(mitte, 3.2, 1.5);
     teile.push([mitte]);
 
-    // Im nächsten Frame starten, damit die Übergänge greifen
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        teile.forEach(function (t) {
-          if (t[1]) t[0].style[t[1]] = t[2];
-          else { t[0].style.transform = "scale(1)"; t[0].style.opacity = "1"; }
+    var blumeObj = { g: g, x: x, y: y, r: groesse, gemalt: false };
+    blumeObj.malen = function (verzoegerung) {
+      if (blumeObj.gemalt) return;
+      blumeObj.gemalt = true;
+      setTimeout(function () {
+        // Im nächsten Frame starten, damit die Übergänge greifen
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            teile.forEach(function (t) {
+              if (t[1]) t[0].style[t[1]] = t[2];
+              else { t[0].style.transform = "scale(1)"; t[0].style.opacity = "1"; }
+            });
+          });
         });
-      });
-    });
-
-    return { g: g, x: x, y: y, r: groesse };
+      }, verzoegerung || 0);
+    };
+    return blumeObj;
   }
 
-  // Bereiche mit Inhalt freihalten, damit unter dem Glas keine trüben Flecken entstehen
-  var FREIHALTEN = ".titel, .untertitel, .trenner, .event-button, .hero";
+  // Bereiche mit Inhalt freihalten, damit unter dem Glas keine trüben Flecken entstehen.
+  // Auf dem Handy decken die Karten fast die ganze Breite ab, dort dürfen Blumen darunter.
+  var FREIHALTEN = ".titel, .untertitel, .trenner, .event-button, .hero h1, .hero .datum, .zusage-knopf, .zurueck";
 
   function belegt() {
-    return Array.prototype.map.call(document.querySelectorAll(FREIHALTEN), function (e) {
-      return e.getBoundingClientRect();
+    var auswahl = FREIHALTEN + (breite > 700 ? ", .karte" : "");
+    return Array.prototype.map.call(document.querySelectorAll(auswahl), function (e) {
+      var r = e.getBoundingClientRect();
+      return { left: r.left, right: r.right, top: r.top + window.scrollY, bottom: r.bottom + window.scrollY };
     });
   }
 
-  function platz(groesse) {
+  // Zufälliger freier Platz zwischen von und bis (Seitenkoordinaten)
+  function platz(groesse, von, bis) {
     var flaechen = belegt();
     for (var versuch = 0; versuch < 80; versuch++) {
-      var x = zufall(0, breite), y = zufall(0, hoehe);
+      var x = zufall(0, breite), y = zufall(von, bis);
       // Umriss der Blume samt Stiel
       var l = x - groesse, r = x + groesse, o = y - groesse, u = y + groesse * 2.6;
+      if (u > hoehe) continue;
       var frei = flaechen.every(function (f) {
         return r < f.left - 8 || l > f.right + 8 || u < f.top - 8 || o > f.bottom + 8;
       }) && blumen.every(function (b) {
@@ -153,50 +166,95 @@
     return null;
   }
 
-  function neueBlume() {
-    var basis = Math.min(breite, hoehe);
+  function neueBlume(von, bis) {
+    var basis = Math.min(breite, window.innerHeight);
     var groesse = zufall(0.07, 0.12) * Math.max(basis, 500);
-    var pos = platz(groesse);
-    if (pos) blumen.push(blume(pos[0], pos[1], groesse));
+    var pos = platz(groesse, von, bis);
+    if (!pos) return null;
+    var b = blume(pos[0], pos[1], groesse);
+    blumen.push(b);
+    return b;
+  }
+
+  function seitenhoehe() {
+    return Math.max(document.documentElement.scrollHeight, window.innerHeight);
   }
 
   function aufbauen() {
     clearInterval(takt);
-    breite = window.innerWidth;
-    hoehe = window.innerHeight;
+    if (beobachter) beobachter.disconnect();
     if (svg) svg.remove();
     blumen = [];
-    svg = el("svg", { "class": "aquarell", viewBox: "0 0 " + breite + " " + hoehe, preserveAspectRatio: "xMidYMid slice" });
+    breite = document.documentElement.clientWidth;
+    hoehe = seitenhoehe();
+
+    svg = el("svg", { "class": "aquarell", "aria-hidden": "true", width: breite, height: hoehe,
+      viewBox: "0 0 " + breite + " " + hoehe });
+    svg.style.height = hoehe + "px";
     definitionen();
     ebene = el("g", {}, svg);
-    behaelter.appendChild(svg);
+    document.body.appendChild(svg);
 
-    var ziel = breite > 700 ? 10 : 6;
-    for (var i = 0; i < ziel; i++) {
-      (function (n) {
-        setTimeout(neueBlume, ruhig ? 0 : n * 900);
-      })(i);
+    // Blumen über die ganze Seite verteilen
+    var ziel = Math.round(PRO_BILDSCHIRM * hoehe / window.innerHeight);
+    for (var i = 0; i < ziel; i++) neueBlume(0, hoehe);
+
+    if (ruhig) {
+      blumen.forEach(function (b) { b.malen(0); });
+      return;
     }
-    if (ruhig) return;
 
-    // Danach: alte Blume verblasst, neue wird gemalt
+    // Erst malen, wenn die Blume ins Bild kommt; mehrere nacheinander statt gleichzeitig
+    var warteschlange = 0;
+    beobachter = new IntersectionObserver(function (eintraege) {
+      eintraege.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var b = blumen.filter(function (x) { return x.g === e.target; })[0];
+        beobachter.unobserve(e.target);
+        if (!b) return;
+        b.malen(warteschlange * 700);
+        warteschlange++;
+        setTimeout(function () { warteschlange = Math.max(0, warteschlange - 1); }, 700 * warteschlange + 700);
+      });
+    }, { threshold: 0.2 });
+    blumen.forEach(function (b) { beobachter.observe(b.g); });
+
+    // Im sichtbaren Bereich: alte Blume verblasst, neue wird gemalt
     takt = setInterval(function () {
-      if (document.hidden || blumen.length < ziel) return;
-      var alt = blumen.shift();
+      if (document.hidden) return;
+      var oben = window.scrollY, unten = oben + window.innerHeight;
+      var sichtbar = blumen.filter(function (b) { return b.gemalt && b.y > oben && b.y < unten; });
+      if (sichtbar.length < 2) return;
+      var alt = sichtbar[0];
+      blumen.splice(blumen.indexOf(alt), 1);
       alt.g.style.opacity = "0";
       setTimeout(function () { alt.g.remove(); }, 2600);
-      neueBlume();
+      var neu = neueBlume(oben, unten);
+      if (neu) neu.malen(0);
     }, 7000);
   }
 
+  // Neu malen, wenn sich die Breite deutlich ändert (nicht bei der mobilen Adressleiste)
   var letzteBreite = window.innerWidth;
   window.addEventListener("resize", function () {
-    // Mobile Adressleiste ändert nur die Höhe – dann nicht neu malen
     if (Math.abs(window.innerWidth - letzteBreite) < 50) return;
     letzteBreite = window.innerWidth;
     clearTimeout(aufbauen.t);
     aufbauen.t = setTimeout(aufbauen, 300);
   });
 
-  aufbauen();
+  // Wächst die Seite (z.B. durch das Zusage-Formular), die Ebene mitwachsen lassen
+  if (window.ResizeObserver) {
+    new ResizeObserver(function () {
+      var h = seitenhoehe();
+      if (!svg || Math.abs(h - hoehe) < 20) return;
+      hoehe = h;
+      svg.setAttribute("height", hoehe);
+      svg.setAttribute("viewBox", "0 0 " + breite + " " + hoehe);
+      svg.style.height = hoehe + "px";
+    }).observe(document.body);
+  }
+
+  if (document.readyState === "complete") aufbauen();
+  else window.addEventListener("load", aufbauen);
 })();
