@@ -14,9 +14,10 @@
   </div>
 
   <header class="hero">
-    <a class="zurueck sans" href="index.html">&larr; Zurück</a>
+    <a class="zurueck sans" href="index.html" hidden>&larr; Zurück</a>
     <h1 class="einblenden">Standesamtliche Hochzeit</h1>
     <p class="datum sans einblenden" style="--verzoegerung: 0.15s">Freitag, 7. Mai 2027</p>
+    <a class="zusage-knopf sans einblenden" style="--verzoegerung: 0.3s" href="#zusage">Jetzt zusagen</a>
   </header>
 
   <main class="inhalt">
@@ -37,9 +38,18 @@
       </a>
       <div class="karten-links"></div>
     </section>
+
+    <section class="karte einblenden" style="--verzoegerung: 0.6s" id="zusage">
+      <h2>Zusagen</h2>
+      <div class="tally" data-tally-id="" data-titel="Zusage Standesamt">
+        <p>Das Formular zum Zusagen folgt in Kürze.</p>
+      </div>
+    </section>
   </main>
 
+  <script src="js/navigation.js"></script>
   <script src="js/karten.js"></script>
+  <script src="js/zusage.js"></script>
   <script src="js/aquarell.js"></script>
 </body>
 </html>

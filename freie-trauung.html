@@ -14,9 +14,10 @@
   </div>
 
   <header class="hero">
-    <a class="zurueck sans" href="index.html">&larr; Zurück</a>
+    <a class="zurueck sans" href="index.html" hidden>&larr; Zurück</a>
     <h1 class="einblenden">Freie Trauung</h1>
     <p class="datum sans einblenden" style="--verzoegerung: 0.15s">Samstag, 7. August 2027</p>
+    <a class="zusage-knopf sans einblenden" style="--verzoegerung: 0.3s" href="#zusage">Jetzt zusagen</a>
   </header>
 
   <main class="inhalt">
@@ -53,9 +54,18 @@
         <a class="karten-link sans" href="https://www.hotel-goetz.com/" target="_blank" rel="noopener">Website Hotel Götz</a>
       </div>
     </section>
+
+    <section class="karte einblenden" style="--verzoegerung: 0.75s" id="zusage">
+      <h2>Zusagen</h2>
+      <div class="tally" data-tally-id="" data-titel="Zusage Freie Trauung">
+        <p>Das Formular zum Zusagen folgt in Kürze.</p>
+      </div>
+    </section>
   </main>
 
+  <script src="js/navigation.js"></script>
   <script src="js/karten.js"></script>
+  <script src="js/zusage.js"></script>
   <script src="js/aquarell.js"></script>
 </body>
 </html>
