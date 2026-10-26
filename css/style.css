@@ -46,7 +46,7 @@ a { color: inherit; }
   width: 4rem;
   height: 2px;
   margin: 0 auto 2.5rem;
-  background: linear-gradient(90deg, var(--peach), var(--golden-hour));
+  background: linear-gradient(90deg, var(--peach), var(--apricot), var(--golden-hour));
   border: 0;
 }
 

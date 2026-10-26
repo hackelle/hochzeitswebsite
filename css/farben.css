@@ -1,11 +1,11 @@
 /* Farbpalette der Hochzeit – zentrale Quelle für alle Seiten */
 :root {
-  --peach:        #F1AC8B;
-  --golden-hour:  #EAA53E;
-  --copper:       #C7562C;
-  --apricot:      #F1AC8B; /* identisch mit peach */
-  --misty-blue:   #9AABBD;
-  --moss:         #A18C4B;
+  --peach:        #F3AE8D;
+  --golden-hour:  #E7A23A;
+  --copper:       #CB5A30;
+  --apricot:      #F79E5C;
+  --misty-blue:   #9AADBE;
+  --moss:         #9F8A49;
 
   /* Abgeleitete Töne für Text und Hintergrund (Lesbarkeit) */
   --hintergrund:  #FDF6F1;
