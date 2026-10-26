@@ -3,24 +3,29 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Unsere Hochzeit</title>
+  <title>Anna &amp; Leo heiraten</title>
   <link rel="stylesheet" href="css/farben.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div class="hintergrund" aria-hidden="true">
+    <div class="blob blob--1"></div><div class="blob blob--2"></div>
+    <div class="blob blob--3"></div><div class="blob blob--4"></div>
+  </div>
+
   <main class="landing">
-    <h1 class="titel">Name &amp; Name</h1>
-    <p class="untertitel">Wir heiraten</p>
-    <hr class="trenner">
+    <h1 class="titel einblenden">Anna &amp; Leo</h1>
+    <p class="untertitel sans einblenden" style="--verzoegerung: 0.15s">heiraten</p>
+    <hr class="trenner einblenden" style="--verzoegerung: 0.3s">
 
     <nav class="event-auswahl" aria-label="Events">
-      <a class="event-button event-button--standesamt" href="standesamt.html">
+      <a class="event-button event-button--standesamt einblenden" style="--verzoegerung: 0.45s" href="standesamt.html">
         <span class="event-name">Standesamtliche Hochzeit</span>
-        <span class="event-info">Datum folgt</span>
+        <span class="event-info sans">7. Mai 2027 · Berlin</span>
       </a>
-      <a class="event-button event-button--freie-trauung" href="freie-trauung.html">
+      <a class="event-button event-button--freie-trauung einblenden" style="--verzoegerung: 0.6s" href="freie-trauung.html">
         <span class="event-name">Freie Trauung</span>
-        <span class="event-info">Datum folgt</span>
+        <span class="event-info sans">7. August 2027 · Groß Kreutz</span>
       </a>
     </nav>
   </main>

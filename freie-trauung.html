@@ -3,15 +3,49 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Freie Trauung</title>
+  <title>Freie Trauung · Anna &amp; Leo</title>
   <link rel="stylesheet" href="css/farben.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body style="--akzent: var(--copper)">
-  <main class="unterseite">
-    <a class="zurueck" href="index.html">&larr; Zurück</a>
-    <h1>Freie Trauung</h1>
-    <p>Details folgen.</p>
+<body style="--akzent: var(--akzent-freie-trauung); --akzent-text: #A0401C; --hero-bild: url('bilder/tigermotte.jpg')">
+  <div class="hintergrund" aria-hidden="true">
+    <div class="blob blob--1"></div><div class="blob blob--2"></div>
+    <div class="blob blob--3"></div><div class="blob blob--4"></div>
+  </div>
+
+  <header class="hero">
+    <a class="zurueck sans" href="index.html">&larr; Zurück</a>
+    <h1 class="einblenden">Freie Trauung</h1>
+    <p class="datum sans einblenden" style="--verzoegerung: 0.15s">Samstag, 7. August 2027</p>
+  </header>
+
+  <main class="inhalt">
+    <section class="karte einblenden" style="--verzoegerung: 0.3s" data-adresse="Potsdamer Landstraße 4, 14550 Groß Kreutz (Havel)">
+      <h2>Ort</h2>
+      <p class="ort">Freizeithof Tigermotte</p>
+      <a class="adresse" href="https://www.google.com/maps/search/?api=1&amp;query=Potsdamer%20Landstra%C3%9Fe%204%2C%2014550%20Gro%C3%9F%20Kreutz%20(Havel)" target="_blank" rel="noopener">
+        <address>Potsdamer Landstraße 4<br>14550 Groß Kreutz (Havel)</address>
+      </a>
+      <div class="karten-links"></div>
+    </section>
+
+    <section class="karte einblenden" style="--verzoegerung: 0.45s">
+      <h2>Anreise mit Bus &amp; Bahn</h2>
+      <p>Mit dem RE1 bis zum Bahnhof Götz.</p>
+      <p>Für den Heimweg: Die Bahnen fahren bis etwa 1:30 Uhr.</p>
+    </section>
+
+    <section class="karte einblenden" style="--verzoegerung: 0.6s" data-adresse="Ringstraße 7, 14550 Groß Kreutz (Havel)">
+      <h2>Übernachtung</h2>
+      <p>Ihr könnt direkt auf dem Hof übernachten, mit Zelt, Campingbus oder Wohnmobil.</p>
+      <p>Alternativ gibt es das Hotel Götz:</p>
+      <a class="adresse" href="https://www.google.com/maps/search/?api=1&amp;query=Ringstra%C3%9Fe%207%2C%2014550%20Gro%C3%9F%20Kreutz%20(Havel)" target="_blank" rel="noopener">
+        <address>Ringstraße 7<br>14550 Groß Kreutz (Havel), OT Götz</address>
+      </a>
+      <div class="karten-links"></div>
+    </section>
   </main>
+
+  <script src="js/karten.js"></script>
 </body>
 </html>
