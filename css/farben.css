@@ -1,0 +1,18 @@
+/* Farbpalette der Hochzeit – zentrale Quelle für alle Seiten */
+:root {
+  --peach:        #F1AC8B;
+  --golden-hour:  #EAA53E;
+  --copper:       #C7562C;
+  --apricot:      #F1AC8B; /* identisch mit peach */
+  --misty-blue:   #9AABBD;
+  --moss:         #A18C4B;
+
+  /* Abgeleitete Töne für Text und Hintergrund (Lesbarkeit) */
+  --hintergrund:  #FDF6F1;
+  --text:         #3B2F2A;
+  --text-blau:    #26313D;
+
+  /* Event-Akzente */
+  --akzent-standesamt:     var(--misty-blue);
+  --akzent-freie-trauung:  var(--copper);
+}

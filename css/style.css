@@ -1,0 +1,145 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--hintergrund);
+  color: var(--text);
+  font-family: "Cormorant Garamond", "Palatino Linotype", Palatino, Georgia, serif;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+}
+
+a { color: inherit; }
+
+/* ---------- Landing Page ---------- */
+.landing {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.titel {
+  margin: 0 0 0.25rem;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  letter-spacing: 0.02em;
+  color: var(--copper);
+}
+
+.untertitel {
+  margin: 0 0 2.5rem;
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  color: var(--moss);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.trenner {
+  width: 4rem;
+  height: 2px;
+  margin: 0 auto 2.5rem;
+  background: linear-gradient(90deg, var(--peach), var(--golden-hour));
+  border: 0;
+}
+
+/* Handy: untereinander */
+.event-auswahl {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 56rem;
+}
+
+/* PC/Tablet quer: nebeneinander */
+@media (min-width: 768px) {
+  .event-auswahl {
+    flex-direction: row;
+    gap: 2rem;
+  }
+}
+
+.event-button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 11rem;
+  padding: 2rem 1.5rem;
+  border-radius: 1.25rem;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(59, 47, 42, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .event-button { min-height: 16rem; }
+}
+
+.event-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(59, 47, 42, 0.18);
+}
+
+.event-button:focus-visible {
+  outline: 3px solid var(--golden-hour);
+  outline-offset: 4px;
+}
+
+.event-button .event-name {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  line-height: 1.2;
+}
+
+.event-button .event-info {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.event-button--standesamt {
+  background: var(--akzent-standesamt);
+  color: var(--text-blau);
+}
+
+.event-button--freie-trauung {
+  background: var(--akzent-freie-trauung);
+  color: #FFFFFF;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .event-button { transition: none; }
+  .event-button:hover { transform: none; }
+}
+
+/* ---------- Unterseiten (Platzhalter) ---------- */
+.unterseite {
+  flex: 1;
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+}
+
+.unterseite h1 {
+  font-weight: 400;
+  font-size: clamp(2rem, 6vw, 3rem);
+  border-bottom: 3px solid var(--akzent);
+  padding-bottom: 0.5rem;
+}
+
+.zurueck {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+}
