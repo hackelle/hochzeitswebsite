@@ -16,7 +16,7 @@
     if (!ziel) return;
     [["Google Maps", google], ["Apple Maps", apple]].forEach(function (k) {
       var a = document.createElement("a");
-      a.className = "karten-link sans";
+      a.className = "karten-link";
       a.href = k[1];
       a.target = "_blank";
       a.rel = "noopener";

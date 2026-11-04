@@ -16,8 +16,6 @@
   var MOSS = "#9F8A49";
 
   var ruhig = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (!document.querySelector(".hintergrund")) return;
-
   var svg, ebene, blumen = [], breite = 0, hoehe = 0, takt, beobachter;
   var PRO_BILDSCHIRM = window.innerWidth > 700 ? 10 : 6;
 
@@ -135,13 +133,11 @@
     return blumeObj;
   }
 
-  // Bereiche mit Inhalt freihalten, damit unter dem Glas keine trüben Flecken entstehen.
-  // Auf dem Handy decken die Karten fast die ganze Breite ab, dort dürfen Blumen darunter.
-  var FREIHALTEN = ".titel, .untertitel, .trenner, .event-button, .hero h1, .hero .datum, .zusage-knopf, .zurueck";
+  // Text und Knöpfe freihalten, damit alles lesbar bleibt
+  var FREIHALTEN = ".titel, .untertitel, .event-button, .hero h1, .hero .datum, .zusage-knopf, .zurueck, .abschnitt > *";
 
   function belegt() {
-    var auswahl = FREIHALTEN + (breite > 700 ? ", .karte" : "");
-    return Array.prototype.map.call(document.querySelectorAll(auswahl), function (e) {
+    return Array.prototype.map.call(document.querySelectorAll(FREIHALTEN), function (e) {
       var r = e.getBoundingClientRect();
       return { left: r.left, right: r.right, top: r.top + window.scrollY, bottom: r.bottom + window.scrollY };
     });

@@ -18,7 +18,7 @@
 
   // Ausweichlink, falls das eingebettete Formular nicht lädt (z.B. durch Tracking-Blocker)
   var p = document.createElement("p");
-  p.className = "hinweis sans";
+  p.className = "hinweis";
   p.innerHTML = 'Formular wird nicht angezeigt? <a target="_blank" rel="noopener" href="https://tally.so/r/' +
     encodeURIComponent(id) + '">Hier in neuem Tab öffnen</a>.';
   box.appendChild(p);

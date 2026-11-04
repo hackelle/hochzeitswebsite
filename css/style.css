@@ -1,55 +1,48 @@
+/* Fraunces, selbst gehostet (kein Google-Server, OFL-Lizenz in schriften/OFL.txt) */
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../schriften/fraunces.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fraunces";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../schriften/fraunces-italic.woff2") format("woff2");
+}
+
 *, *::before, *::after { box-sizing: border-box; }
 
 html, body { margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
 
 body {
   position: relative;
   min-height: 100vh;
   min-height: 100dvh;
-  background: var(--hintergrund);
-  color: var(--text);
-  font-family: "Cormorant Garamond", "Palatino Linotype", Palatino, Georgia, serif;
-  line-height: 1.5;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  background: var(--papier);
+  color: var(--text);
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.125rem;
+  font-weight: 360;
+  font-optical-sizing: auto;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
 a { color: inherit; }
 
-.sans {
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-}
+em { font-style: italic; }
 
-/* ---------- Weicher, bewegter Hintergrund ---------- */
-.hintergrund {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.blob {
-  position: absolute;
-  width: 55vmax;
-  height: 55vmax;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.28;
-  will-change: transform;
-}
-
-.blob--1 { background: var(--peach);       top: -20vmax; left: -15vmax; animation: schweben-1 26s ease-in-out infinite alternate; }
-.blob--2 { background: var(--misty-blue);  bottom: -25vmax; left: -10vmax; animation: schweben-2 32s ease-in-out infinite alternate; }
-.blob--3 { background: var(--apricot);     top: -15vmax; right: -20vmax; opacity: 0.45; animation: schweben-3 29s ease-in-out infinite alternate; }
-.blob--4 { background: var(--golden-hour); bottom: -30vmax; right: -15vmax; opacity: 0.35; animation: schweben-1 35s ease-in-out infinite alternate-reverse; }
-
-@keyframes schweben-1 { to { transform: translate(12vmax, 10vmax) scale(1.1); } }
-@keyframes schweben-2 { to { transform: translate(15vmax, -8vmax) scale(0.9); } }
-@keyframes schweben-3 { to { transform: translate(-10vmax, 12vmax) scale(1.15); } }
-
-/* Aquarell-Blumen (js/aquarell.js) */
+/* ---------- Aquarell-Blumen (js/aquarell.js) ---------- */
 .aquarell {
   position: absolute;
   top: 0;
@@ -65,164 +58,134 @@ a { color: inherit; }
   transform-origin: 0 0;
 }
 
-/* ---------- Einblenden ---------- */
-.einblenden {
-  opacity: 0;
-  transform: translateY(18px);
-  animation: einblenden 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  animation-delay: var(--verzoegerung, 0s);
-}
-
-@keyframes einblenden { to { opacity: 1; transform: none; } }
-
-/* ---------- Landing Page ---------- */
+/* ---------- Startseite ---------- */
 .landing {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 3rem 1rem;
+  padding: 4rem 1rem;
   text-align: center;
 }
 
 .titel {
-  margin: 0 0 0.25rem;
-  font-weight: 400;
-  font-size: clamp(2.75rem, 9vw, 5rem);
-  letter-spacing: 0.02em;
+  margin: 0;
+  font-size: clamp(3.5rem, 13vw, 7.5rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.titel em {
+  font-weight: 300;
   color: var(--copper);
 }
 
 .untertitel {
-  margin: 0 0 2rem;
-  font-size: clamp(1.15rem, 3vw, 1.4rem);
-  font-weight: 600;
+  margin: 0.75rem 0 3rem;
+  font-size: clamp(1.25rem, 3.5vw, 1.6rem);
+  font-style: italic;
   color: var(--moss-dunkel);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
-.trenner {
-  width: 5rem;
-  height: 2px;
-  margin: 0 auto 2.5rem;
-  background: linear-gradient(90deg, var(--peach), var(--apricot), var(--golden-hour));
-  border: 0;
-  border-radius: 2px;
 }
 
 /* Handy: untereinander */
 .event-auswahl {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
   width: 100%;
-  max-width: 56rem;
+  max-width: 54rem;
+  text-align: left;
 }
 
 /* PC/Tablet quer: nebeneinander */
 @media (min-width: 768px) {
   .event-auswahl {
-    flex-direction: row;
-    gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
   }
 }
 
+/* Zwei flächige Farbfelder wie bedrucktes Papier: keine Schatten, kein Glas */
 .event-button {
-  --tint: var(--misty-blue);
-  position: relative;
-  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  min-height: 11rem;
-  padding: 2rem 1.5rem;
-  border-radius: 1.75rem;
+  justify-content: space-between;
+  gap: 2rem;
+  min-height: 10rem;
+  padding: 1.5rem 1.5rem 1.4rem;
+  border-radius: 3px;
   text-decoration: none;
-  overflow: hidden;
-  isolation: isolate;
-  background: color-mix(in srgb, var(--tint) 28%, transparent);
-  border: 1px solid var(--glas-rand);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
-  backdrop-filter: blur(18px) saturate(140%);
-  box-shadow: var(--schatten);
-  transition:
-    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 0.6s ease;
-}
-
-/* Sanfter Lichtschein, der beim Hover hineinfließt */
-.event-button::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.7), transparent 60%);
-  opacity: 0.4;
-  transition: opacity 0.6s ease;
+  transition: background-color 0.3s ease;
 }
 
 @media (min-width: 768px) {
-  .event-button { min-height: 17rem; }
-}
-
-.event-button:hover {
-  transform: translateY(-6px);
-  background: color-mix(in srgb, var(--tint) 40%, transparent);
-  box-shadow: 0 18px 40px rgba(59, 47, 42, 0.14);
-}
-
-.event-button:hover::before { opacity: 0.9; }
-
-.event-button:focus-visible {
-  outline: 2px solid var(--tint);
-  outline-offset: 5px;
-}
-
-.event-button .event-name {
-  font-size: clamp(1.7rem, 4vw, 2.3rem);
-  line-height: 1.2;
+  .event-button {
+    min-height: 16rem;
+    padding: 2rem 2rem 1.75rem;
+  }
 }
 
 .event-button .event-info {
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.event-button .event-name {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: clamp(1.75rem, 4vw, 2.4rem);
+  font-weight: 380;
+  line-height: 1.1;
+}
+
+.event-button .pfeil {
+  flex-shrink: 0;
+  font-size: 0.8em;
+  transition: transform 0.3s ease;
+}
+
+.event-button:hover .pfeil { transform: translateX(6px); }
+
+.event-button:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 4px;
 }
 
 .event-button--standesamt {
-  --tint: var(--akzent-standesamt);
+  background: var(--misty-blue);
   color: var(--text-blau);
 }
 
+.event-button--standesamt:hover { background: #8C9FB1; }
+
 .event-button--freie-trauung {
-  --tint: var(--akzent-freie-trauung);
-  color: #7A2E12;
+  background: var(--copper);
+  color: #FFF8F2;
 }
 
+.event-button--freie-trauung:hover { background: #B94F28; }
+
 /* ---------- Unterseiten ---------- */
-/* Farbverlauf, der weich in den Seitenhintergrund ausläuft (kein harter Schnitt) */
+/* Farbverlauf, der ohne Kante in das Papier ausläuft */
 .hero {
   position: relative;
   isolation: isolate;
-  min-height: 70vh;
-  min-height: 70svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 4.5rem 1rem 6rem;
+  padding: 5rem 0 4rem;
   color: var(--hero-text);
-  text-align: center;
   background: linear-gradient(180deg,
     var(--verlauf-1) 0%,
-    var(--verlauf-2) 38%,
-    color-mix(in srgb, var(--verlauf-3) 70%, transparent) 68%,
+    var(--verlauf-2) 40%,
+    color-mix(in srgb, var(--verlauf-3) 60%, transparent) 72%,
     transparent 100%);
+}
+
+@media (min-width: 768px) {
+  .hero { padding: 8rem 0 6rem; }
 }
 
 /* Optionales Foto: eingefärbt und nach unten ausgeblendet */
@@ -231,179 +194,163 @@ a { color: inherit; }
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: var(--hero-bild, none) center / cover no-repeat;
+  background: center / cover no-repeat;
   opacity: 0.45;
   mix-blend-mode: multiply;
   -webkit-mask-image: linear-gradient(180deg, black 40%, transparent 95%);
   mask-image: linear-gradient(180deg, black 40%, transparent 95%);
 }
 
-.hero .zurueck {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-}
+/* Fotos (Pfad relativ zu dieser CSS-Datei); fehlt eins, bleibt nur der Verlauf */
+.hero--standesamt::before { background-image: url("../bilder/standesamt.jpg"); }
+.hero--freie-trauung::before { background-image: url("../bilder/tigermotte.jpg"); }
 
-.hero h1 {
-  margin: 0;
-  font-weight: 400;
-  font-size: clamp(2.5rem, 8vw, 4.5rem);
-  line-height: 1.1;
-}
-
-.hero .datum {
-  margin: 0.5rem 0 0;
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
-.zurueck,
-.zusage-knopf {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  border-radius: 999px;
-  text-decoration: none;
-  color: var(--hero-text);
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.75);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 16px rgba(59, 47, 42, 0.08);
-  transition: background-color 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+/* Gleiche Spalte wie .inhalt, damit Titel und Text bündig stehen */
+.hero-innen {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
 }
 
 .zurueck {
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  font-size: 1rem;
+  font-style: italic;
+  text-decoration: none;
+  color: var(--hero-text);
 }
 
-.zusage-knopf {
-  align-self: center;
-  margin-top: 1.5rem;
-  padding: 0.7rem 1.6rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-}
-
-.zurueck:hover,
-.zusage-knopf:hover {
-  background: rgba(255, 255, 255, 0.75);
-  transform: translateY(-2px);
-}
+.zurueck:hover { text-decoration: underline; text-underline-offset: 4px; }
 
 .zurueck[hidden] { display: none; }
 
-html { scroll-behavior: smooth; }
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2.75rem, 9vw, 5rem);
+  font-weight: 320;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+}
 
-#zusage { scroll-margin-top: 1rem; }
+.hero .datum {
+  margin: 1rem 0 0;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-style: italic;
+}
 
+.zusage-knopf {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: 3px;
+  font-size: 1.05rem;
+  font-weight: 450;
+  text-decoration: none;
+  color: #FFFFFF;
+  background: var(--hero-text);
+  transition: background-color 0.3s ease;
+}
+
+.zusage-knopf:hover { background: var(--text); }
+
+/* Inhalt als ruhige Liste mit Haarlinien statt Kartenstapel */
 .inhalt {
   width: 100%;
-  max-width: 46rem;
-  margin: -2rem auto 0;
-  padding: 0 1rem 4rem;
-  display: grid;
-  gap: 1.25rem;
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 0 1.25rem 5rem;
 }
 
-.karte {
-  padding: 1.5rem 1.5rem 1.6rem;
-  border-radius: 1.5rem;
-  background: var(--glas);
-  border: 1px solid var(--glas-rand);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  backdrop-filter: blur(16px) saturate(140%);
-  box-shadow: var(--schatten);
+.abschnitt {
+  padding: 2rem 0;
+  border-top: 1px solid var(--linie);
 }
 
-/* Logo des Hofs: flattert sanft in der Ecke der Karte */
+@media (min-width: 768px) {
+  .abschnitt {
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    gap: 2rem;
+    padding: 2.5rem 0;
+  }
+}
+
+.abschnitt h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.35rem;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.3;
+  color: var(--akzent-text);
+}
+
+.abschnitt p { margin: 0 0 0.75rem; }
+
+.abschnitt p:last-child { margin-bottom: 0; }
+
+.ort {
+  font-size: 1.35rem;
+  font-weight: 450;
+  line-height: 1.3;
+}
+
+.adresse {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.adresse address { font-style: normal; }
+
+.adresse:hover address { text-decoration: underline; text-underline-offset: 4px; }
+
+.karten-links {
+  margin: 0.5rem 0 1rem;
+  font-size: 1rem;
+}
+
+.karten-links:last-child { margin-bottom: 0; }
+
+.karten-link {
+  color: var(--akzent-text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.karten-link + .karten-link::before {
+  content: "·";
+  display: inline-block;
+  margin: 0 0.6rem;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.hinweis {
+  font-size: 0.95rem;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* Logo des Hofs: flattert sanft */
 .hof-logo {
   float: right;
-  width: clamp(6rem, 28vw, 9rem);
+  width: clamp(5.5rem, 24vw, 8rem);
   height: auto;
-  margin: -0.5rem -0.5rem 0.5rem 1rem;
+  margin: -0.5rem 0 0.5rem 1rem;
   animation: flattern 6s ease-in-out infinite;
 }
 
 @keyframes flattern {
   0%, 100% { transform: translateY(0) rotate(-3deg); }
-  50%      { transform: translateY(-8px) rotate(3deg); }
+  50%      { transform: translateY(-6px) rotate(3deg); }
 }
 
-.karte h2 {
-  margin: 0 0 0.5rem;
-  font-weight: 500;
-  font-size: 1.7rem;
-  color: var(--akzent-text);
-}
-
-.karte p { margin: 0.4rem 0; font-size: 1.15rem; }
-
-.karte .ort {
-  margin-bottom: 0.25rem;
-  font-size: 1.3rem;
-  font-weight: 600;
-}
-
-/* ---------- Adressen & Karten-Links ---------- */
-.adresse address { font-style: normal; }
-
-.adresse {
-  display: inline-block;
-  font-style: normal;
-  font-size: 1.15rem;
-  text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--akzent) 60%, transparent);
-  text-underline-offset: 4px;
-  transition: color 0.3s ease;
-}
-
-.adresse:hover { color: var(--akzent-text); }
-
-.karten-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 0.75rem 0;
-}
-
-.karten-link {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.55rem 1.1rem;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  text-decoration: none;
-  color: var(--akzent-text);
-  background: color-mix(in srgb, var(--akzent) 16%, transparent);
-  border: 1px solid color-mix(in srgb, var(--akzent) 40%, transparent);
-  transition: background-color 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.karten-link:hover {
-  background: color-mix(in srgb, var(--akzent) 30%, transparent);
-  transform: translateY(-2px);
-}
-
-.hinweis {
-  font-size: 1rem !important;
-  opacity: 0.8;
-}
-
-.fussnote {
-  margin-top: 0.5rem;
-  font-size: 0.75rem;
-  text-align: center;
-  opacity: 0.6;
-}
+#zusage { scroll-margin-top: 1rem; }
 
 @media (prefers-reduced-motion: reduce) {
-  .blob, .einblenden, .hof-logo { animation: none; }
-  .einblenden { opacity: 1; transform: none; }
-  .event-button, .karten-link, .zurueck, .zusage-knopf { transition: none; }
-  .event-button:hover, .karten-link:hover, .zurueck:hover, .zusage-knopf:hover { transform: none; }
+  html { scroll-behavior: auto; }
+  .hof-logo { animation: none; }
+  .event-button, .event-button .pfeil { transition: none; }
 }

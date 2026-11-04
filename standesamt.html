@@ -3,43 +3,45 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Standesamtliche Hochzeit · Anna &amp; Leo</title>
+  <title>Standesamt · Anna &amp; Leo</title>
+  <link rel="preload" href="schriften/fraunces.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/farben.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body style="--akzent: var(--akzent-standesamt); --akzent-text: #3E5468; --hero-text: #2F4458; --verlauf-1: var(--misty-blue); --verlauf-2: color-mix(in srgb, var(--misty-blue) 60%, white); --verlauf-3: var(--peach); --hero-bild: url('bilder/standesamt.jpg')">
-  <div class="hintergrund" aria-hidden="true">
-    <div class="blob blob--1"></div><div class="blob blob--2"></div>
-    <div class="blob blob--3"></div><div class="blob blob--4"></div>
-  </div>
-
-  <header class="hero">
-    <a class="zurueck sans" href="index.html" hidden>&larr; Zurück</a>
-    <h1 class="einblenden">Standesamtliche Hochzeit</h1>
-    <p class="datum sans einblenden" style="--verzoegerung: 0.15s">Freitag, 7. Mai 2027</p>
-    <a class="zusage-knopf sans einblenden" style="--verzoegerung: 0.3s" href="#zusage">Jetzt zusagen</a>
+<body style="--akzent: var(--akzent-standesamt); --akzent-text: #3E5468; --hero-text: #2F4458; --verlauf-1: var(--misty-blue); --verlauf-2: color-mix(in srgb, var(--misty-blue) 60%, white); --verlauf-3: var(--peach);">
+  <header class="hero hero--standesamt">
+    <a class="zurueck" href="index.html" hidden>&larr; Anna &amp; Leo</a>
+    <div class="hero-innen">
+      <h1>Standesamtliche Trauung</h1>
+      <p class="datum">Freitag, 7. Mai 2027</p>
+      <a class="zusage-knopf" href="#zusage">Zusagen</a>
+    </div>
   </header>
 
   <main class="inhalt">
-    <section class="karte einblenden" style="--verzoegerung: 0.3s" data-adresse="Berkaer Platz 1, 14199 Berlin">
+    <section class="abschnitt" data-adresse="Berkaer Platz 1, 14199 Berlin">
       <h2>Trauung</h2>
-      <p class="ort">Standesamt Schmargendorf</p>
-      <a class="adresse" href="https://www.google.com/maps/search/?api=1&amp;query=Berkaer%20Platz%201%2C%2014199%20Berlin" target="_blank" rel="noopener">
-        <address>Berkaer Platz 1<br>14199 Berlin</address>
-      </a>
-      <div class="karten-links"></div>
+      <div>
+        <p class="ort">Standesamt Schmargendorf</p>
+        <a class="adresse" href="https://www.google.com/maps/search/?api=1&amp;query=Berkaer%20Platz%201%2C%2014199%20Berlin" target="_blank" rel="noopener">
+          <address>Berkaer Platz 1<br>14199 Berlin</address>
+        </a>
+        <div class="karten-links"></div>
+      </div>
     </section>
 
-    <section class="karte einblenden" style="--verzoegerung: 0.45s" data-adresse="Tölzer Straße 9, 14199 Berlin">
-      <h2>Kuchen &amp; Feier</h2>
-      <p>Im Anschluss feiern wir mit Kuchen bei uns zu Hause im Innenhof.</p>
-      <a class="adresse" href="https://www.google.com/maps/search/?api=1&amp;query=T%C3%B6lzer%20Stra%C3%9Fe%209%2C%2014199%20Berlin" target="_blank" rel="noopener">
-        <address>Tölzer Straße 9<br>14199 Berlin</address>
-      </a>
-      <div class="karten-links"></div>
+    <section class="abschnitt" data-adresse="Tölzer Straße 9, 14199 Berlin">
+      <h2>Danach</h2>
+      <div>
+        <p>Kuchen und Feier bei uns zu Hause im Innenhof.</p>
+        <a class="adresse" href="https://www.google.com/maps/search/?api=1&amp;query=T%C3%B6lzer%20Stra%C3%9Fe%209%2C%2014199%20Berlin" target="_blank" rel="noopener">
+          <address>Tölzer Straße 9<br>14199 Berlin</address>
+        </a>
+        <div class="karten-links"></div>
+      </div>
     </section>
 
-    <section class="karte einblenden" style="--verzoegerung: 0.6s" id="zusage">
+    <section class="abschnitt" id="zusage">
       <h2>Zusagen</h2>
       <div class="tally" data-tally-id="Kpp5xk" data-titel="Zusage Standesamt">
         <p>Zum Zusagen bitte <a href="https://tally.so/r/Kpp5xk" target="_blank" rel="noopener">dieses Formular</a> ausfüllen.</p>
